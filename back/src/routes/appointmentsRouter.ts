@@ -14,8 +14,8 @@ appointmentRouter.get("/", getAppointments);
 
 appointmentRouter.get("/appointment", oneAppointment);
 
-appointmentRouter.post("/schedule", createAppointment);
+appointmentRouter.post("/appointment/schedule", createAppointment);
 
-appointmentRouter.put("/cancel", cancelAppointment);
+appointmentRouter.put("/appointment/cancel", cancelAppointment);
 
 export default appointmentRouter;
