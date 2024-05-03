@@ -15,15 +15,21 @@ export const getAppointmentByIdService = async (id: number): Promise<IAppointmen
     }
     return appointment
 }
-// Implementar una función que pueda crear un nuevo turno, siempre guardando, además, el ID del usuario que ha creado dicho turno. NO PUEDE HABER UN TURNO SIN ID DE USUARIO. 
-export const createAppointmentService = async (appointment: IAppointment, userId: number): Promise<void> => {
+
+export const createAppointmentService = async (appointment: IAppointment): Promise<void> => {
     const newAppointment: IAppointment = {
         id: id,
         date: appointment.date,
         time: appointment.time,
-        userId: userId,
+        userId: appointment.userId,
         status: appointment.status
     }
+
+    if(!appointment.userId){
+        throw new Error('Falta userID');
+    }
+
+    id++;
     appointments.push(newAppointment)
 }
 
