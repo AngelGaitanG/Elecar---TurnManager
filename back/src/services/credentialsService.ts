@@ -8,18 +8,24 @@ export const createCredential = async (username: string, password: string): Prom
         password
     }
     id++
-    credentials.push(newCredential)
+
+    if (credentials.find((credential) => credential.username === username)) {
+        throw new Error('El username ya existe');
+    } else {
+        credentials.push(newCredential)
+    }
+    
     return newCredential.id;
 }
 
 export const loginCredential = async (username: string, password: string): Promise<number> => {
-   const idUser = credentials.find((crendetial) => {
+   const user = credentials.find((crendetial) => {
         if (crendetial.username === username && crendetial.password === password) {
             return crendetial.id
         };
     });
-    if (idUser === undefined) {
+    if (user === undefined) {
         throw new Error('Credenciales invalidas');
     }
-    return idUser.id;
+    return user.id;
 }

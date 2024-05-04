@@ -8,7 +8,7 @@ export const getAppointments = async (req: Request, res: Response) => {
 }
 
 export const oneAppointment = async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const { id } = req.body;
     const idNumber = parseInt(id);
     const appointment = await getAppointmentByIdService(idNumber);
     res.status(200).send(appointment);

@@ -1,7 +1,16 @@
-import IAppointment from "../interfaces/IAppointment"
+import IAppointmentDto from "../dto/appointmentDto";
+import { IAppointment, Status } from "../interfaces/IAppointment"
 
-let appointments: IAppointment[] = []
-let id = 1;
+let appointments: IAppointment[] = [
+    {
+        id: 0,
+        date: new Date("2022-04-01"),
+        time: "10:00",
+        userId: 0,
+        status: Status.ACTIVE
+    }
+]
+let appointmentID = 0;
 
 export const getAppointmentsService = async (): Promise<IAppointment[]> => {
     return appointments
@@ -16,9 +25,9 @@ export const getAppointmentByIdService = async (id: number): Promise<IAppointmen
     return appointment
 }
 
-export const createAppointmentService = async (appointment: IAppointment): Promise<void> => {
+export const createAppointmentService = async (appointment: IAppointmentDto): Promise<void> => {
     const newAppointment: IAppointment = {
-        id: id,
+        id: appointmentID,
         date: appointment.date,
         time: appointment.time,
         userId: appointment.userId,
@@ -29,7 +38,7 @@ export const createAppointmentService = async (appointment: IAppointment): Promi
         throw new Error('Falta userID');
     }
 
-    id++;
+    appointmentID++;
     appointments.push(newAppointment)
 }
 
@@ -38,5 +47,5 @@ export const cancelAppointmentService = async (id: number): Promise<void> => {
     if(!appointment){
         throw new Error('El turno no existe');
     }
-    appointment.status = "cancelled"
+    appointment.status = Status.CANCELLED;
 }

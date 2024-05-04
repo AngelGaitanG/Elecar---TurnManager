@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { createUserService, getUserByIdService, getUsersService } from "../services/usersService"
 import IUser from "../interfaces/IUser"
+import { loginCredential } from "../services/credentialsService"
 
 
 export const getUsers = async (req: Request, res: Response) => {
@@ -28,5 +29,15 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
 }
 
 export const loginUser = async (req: Request, res: Response) => {
-    res.status(200).send("Login del usuario a la aplicación")
+    try{
+    const {username, password} = req.body;
+    const id = await loginCredential(username, password)
+
+    let info = 
+        {message: `Login exitoso, id del usuario ${id}`}
+    
+    res.status(200).json(info);}
+    catch(error){
+        res.status(400).send("Credenciales invalidas");
+    }
 }

@@ -3,8 +3,17 @@ import IUserDto from "../dto/userDto";
 import IUser from "../interfaces/IUser"
 import { createCredential } from "./credentialsService";
 
-let users: IUser[] = [];
-let id: number = 1;
+let users: IUser[] = [
+    {
+        id: 0,
+        name: "admin",
+        email: "admin",
+        birthdate: new Date("2022-04-01"),
+        nDni: 0,
+        credentialsId: 0
+    }
+];
+let id: number = 0;
 
 export const getUsersService = async (): Promise<IUser[]> => {
     return users
@@ -20,6 +29,9 @@ export const getUserByIdService = async (id: number): Promise<IUser> => {
 
 export const createUserService = async (credentials: ICredentialDto, user: IUserDto) => {
     
+    if(!credentials){
+        throw new Error('Faltan credenciales');
+    }
     const {username, password} = credentials;
 
     const credential = await createCredential(username, password);
@@ -34,6 +46,16 @@ export const createUserService = async (credentials: ICredentialDto, user: IUser
         credentialsId: credential
     }
     id++;
-    users.push(newUser);
+
+    if(users.find((user) => user.name === name)){
+        throw new Error('El nombre usuario ya existe');
+    } else if(users.find((user) => user.email === email)){
+        throw new Error('El email ya existe');
+    } else if(users.find((user) => user.nDni === nDni)){
+        throw new Error('El dni ya existe');
+    } else {
+        users.push(newUser);
+    }
+
     return newUser;
 }
