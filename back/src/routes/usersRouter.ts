@@ -3,7 +3,7 @@
 // POST a /users/register
 
 import { Router } from "express";
-import { getUserbyId, getUsers, loginUser, registerUser } from "../controllers/usersController";
+import { getUserbyId, getUsers,  loginUser,  registerUser } from "../controllers/usersController";
 
 const userRouter: Router = Router();
 

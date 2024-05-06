@@ -1,33 +1,36 @@
+import { UserModel } from "../config/data-source";
 import ICredentialDto from "../dto/credentialDto";
 import IUserDto from "../dto/userDto";
+import { User } from "../entities/User";
 import IUser from "../interfaces/IUser"
 import { createCredential } from "./credentialsService";
 
-let users: IUser[] = [
-    {
-        id: 0,
-        name: "admin",
-        email: "admin",
-        birthdate: new Date("2022-04-01"),
-        nDni: 0,
-        credentialsId: 0
-    }
-];
-let id: number = 0;
 
-export const getUsersService = async (): Promise<IUser[]> => {
+export const getUsersService = async (): Promise<User[]> => {
+    const users: User[] = await UserModel.find(
+        {
+            relations: {
+                credentialsId: true,
+                appointments: true
+            }
+            }
+    );
     return users
 }
 
-export const getUserByIdService = async (id: number): Promise<IUser> => {
-    const userById = users.find((user) => user.id === id);
-    if(!userById){
+export const getUserByIdService = async (id: number): Promise<User> => {
+    const userById = await UserModel.findOne({ where: { id },
+        relations: {
+            credentialsId: true,
+            appointments: true
+        }});
+    if (!userById) {
         throw new Error('El usuario no existe');
     }
     return userById;
 }
 
-export const createUserService = async (credentials: ICredentialDto, user: IUserDto) => {
+export const createUserService = async (credentials: ICredentialDto, userData: IUserDto):Promise<User> => {
     
     if(!credentials){
         throw new Error('Faltan credenciales');
@@ -35,27 +38,17 @@ export const createUserService = async (credentials: ICredentialDto, user: IUser
     const {username, password} = credentials;
 
     const credential = await createCredential(username, password);
-    const {name, email, birthdate, nDni} = user;
+    const {name, email, birthdate, nDni} = userData;
 
-    const newUser: IUser = {
-        id,
+    const newUser = {
         name,
         email,
         birthdate,
         nDni,
         credentialsId: credential
     }
-    id++;
+    const user: User =  await UserModel.create(newUser);
+    const results = await UserModel.save(user);
 
-    if(users.find((user) => user.name === name)){
-        throw new Error('El nombre usuario ya existe');
-    } else if(users.find((user) => user.email === email)){
-        throw new Error('El email ya existe');
-    } else if(users.find((user) => user.nDni === nDni)){
-        throw new Error('El dni ya existe');
-    } else {
-        users.push(newUser);
-    }
-
-    return newUser;
+    return results;
 }

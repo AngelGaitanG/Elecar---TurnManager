@@ -10,6 +10,6 @@ appointmentRouter.get("/appointment", oneAppointment);
 
 appointmentRouter.post("/appointment/schedule", createAppointment);
 
-appointmentRouter.put("/appointment/cancel/:id", cancelAppointment);
+appointmentRouter.put("/appointment/cancel/", cancelAppointment);
 
 export default appointmentRouter;
