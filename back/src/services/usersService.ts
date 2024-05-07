@@ -39,6 +39,11 @@ export const createUserService = async (credentials: ICredentialDto, userData: I
     const credential = await createCredential(username, password);
     const {name, email, birthdate, nDni} = userData;
 
+    const existingUser = await UserModel.findOne({ where: { email } });
+  if (existingUser) {
+    throw new Error('El email ya está registrado');
+  }
+
     const newUser = {
         name,
         email,

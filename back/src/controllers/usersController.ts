@@ -33,7 +33,7 @@ export const getUserbyId = async (req: Request, res: Response) => {
         };
         res.status(200).json(formattedUser)
     } catch (error) {
-        res.status(404).send("ERROR 404: No se encontro el usuario")
+        res.status(404).send("No se encontro el usuario")
     }
 }
 
