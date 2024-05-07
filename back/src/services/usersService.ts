@@ -2,7 +2,7 @@ import { UserModel } from "../config/data-source";
 import ICredentialDto from "../dto/credentialDto";
 import IUserDto from "../dto/userDto";
 import { User } from "../entities/User";
-import IUser from "../interfaces/IUser"
+
 import { createCredential } from "./credentialsService";
 
 
@@ -10,7 +10,6 @@ export const getUsersService = async (): Promise<User[]> => {
     const users: User[] = await UserModel.find(
         {
             relations: {
-                credentialsId: true,
                 appointments: true
             }
             }
@@ -21,12 +20,12 @@ export const getUsersService = async (): Promise<User[]> => {
 export const getUserByIdService = async (id: number): Promise<User> => {
     const userById = await UserModel.findOne({ where: { id },
         relations: {
-            credentialsId: true,
             appointments: true
         }});
     if (!userById) {
         throw new Error('El usuario no existe');
     }
+    
     return userById;
 }
 

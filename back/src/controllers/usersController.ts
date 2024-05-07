@@ -7,7 +7,15 @@ import { User } from "../entities/User"
 
 export const getUsers = async (req: Request, res: Response) => {
     const users = await getUsersService()
-    res.status(200).json(users)
+    const formattedUsers = users.map(user => ({
+        ...user,
+        birthdate: new Date(user.birthdate).toISOString().split('T')[0],
+        appointments: user.appointments.map(appointment => ({
+            ...appointment,
+            date: new Date(appointment.date).toISOString().split('T')[0]
+        }))
+    }));
+    res.status(200).json(formattedUsers)
 }
 
 export const getUserbyId = async (req: Request, res: Response) => {
@@ -15,18 +23,25 @@ export const getUserbyId = async (req: Request, res: Response) => {
         const { id } = req.params
         const userId = parseInt(id)
         const user = await getUserByIdService(userId)
-        res.status(200).json(user)
+        const formattedUser = {
+            ...user,
+            birthdate: new Date(user.birthdate).toISOString().split('T')[0],
+            appointments: user.appointments.map(appointment => ({
+                ...appointment,
+                date: new Date(appointment.date).toISOString().split('T')[0]
+            }))
+        };
+        res.status(200).json(formattedUser)
     } catch (error) {
-        res.status(400).send("ERROR 400: No se encontro el usuario")
+        res.status(404).send("ERROR 404: No se encontro el usuario")
     }
 }
 
 export const registerUser = async (req: Request, res: Response): Promise<void> => {
     try {
-        const array = req.body
-        const user = array[0];
-        user.birthdate = new Date(user.birthdate);
-        const credentials = array[1];
+        const {name, email, birthdate, nDni, username, password} = req.body
+        const user = {name, email, birthdate, nDni};
+        const credentials = {username, password};
         const newUser :User = await createUserService(credentials, user)
         res.status(201).json(newUser)
     } catch (error) {
@@ -37,10 +52,7 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
 export const loginUser = async (req: Request, res: Response) => {
     try{
     const {username, password} = req.body;
-    const id = await loginCredential(username, password)
-
-    let info = 
-        {message: `Login exitoso, id del usuario: ${id}`}
+    const info = await loginCredential(username, password)
     
     res.status(200).json(info);}
     catch(error){

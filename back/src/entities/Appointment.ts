@@ -12,7 +12,7 @@ export class Appointment {
     id: number
 
     @Column()
-    date: string
+    date: Date
 
     @Column()
     time: string
@@ -20,6 +20,6 @@ export class Appointment {
     @ManyToOne(() => User, (user) => user.appointments)
     userId: number;
 
-    @Column()
+    @Column({default: "active"})
     status: string
 }

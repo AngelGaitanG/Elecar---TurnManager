@@ -10,19 +10,19 @@ export const createCredential = async (username: string, password: string) => {
         password
     }
     
+    const existingCredential = await CredentialModel.findOne({ where: { username }});
+    if (existingCredential) {
+        throw new Error('El username ya existe');
+    }
+
     const credentials: Credential = await CredentialModel.create(newCredential);
     const credentialResult = await CredentialModel.save(credentials);
 
-    // if (credentials.find((credential) => credential.username === username)) {
-    //     throw new Error('El username ya existe');
-    // } else {
-    //     credentials.push(newCredential)
-    // }
-    
+
     return credentialResult;
 }
 
-export const loginCredential = async (username: string, password: string): Promise<number> => {
+export const loginCredential = async (username: string, password: string): Promise<ICredentialDto> => {
     const user: Credential | null = await CredentialModel.findOne({
          where: {
              username: username,
@@ -32,5 +32,9 @@ export const loginCredential = async (username: string, password: string): Promi
      if (user === null) {
          throw new Error('Credenciales inválidas');
      }
-     return user.id;
+     const usuarioFinal = {
+         username: user.username,
+         password: user.password
+     }
+     return usuarioFinal;
  }

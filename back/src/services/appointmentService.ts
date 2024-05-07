@@ -1,6 +1,7 @@
-import { AppointmentModel } from "../config/data-source";
+import { AppointmentModel, UserModel } from "../config/data-source";
 import IAppointmentDto from "../dto/appointmentDto";
 import { Appointment } from "../entities/Appointment";
+
 import { Status } from "../interfaces/IAppointment"
 
 
@@ -11,26 +12,31 @@ export const getAppointmentsService = async (): Promise<Appointment[]> => {
 
 export const getAppointmentByIdService = async (id: number): Promise<Appointment | null> => {
     const appointment = AppointmentModel.findOne({ where: { id } });
-
+    
     if(!appointment){
         throw new Error('El turno no existe');
     }
+    
     return appointment
 }
 
 export const createAppointmentService = async (appointment: IAppointmentDto): Promise<Appointment> => {
     const { date, time, userId, status } = appointment;
-
-    const objectAppointment = {
-        date: date,
-        time: time,
-        userId: userId,
-        status: status
-    };
-
+    
     if (!appointment.userId) {
         throw new Error('Falta userID');
     }
+
+    const user = await UserModel.findOne({ where: { id: userId } });
+    if (!user) {
+        throw new Error('El usuario no existe en la base de datos');
+    }
+
+    const objectAppointment = {
+        date,
+        time,
+        userId,
+    };
 
     const newAppointment = await AppointmentModel.create(objectAppointment);
     const results = await AppointmentModel.save(newAppointment);
