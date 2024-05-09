@@ -20,14 +20,14 @@ export const getAppointmentByIdService = async (id: number): Promise<Appointment
     return appointment
 }
 
-export const createAppointmentService = async (appointment: IAppointmentDto): Promise<Appointment> => {
+export const createAppointmentService = async (appointment: Appointment): Promise<Appointment> => {
     const { date, time, userId, status } = appointment;
     
     if (!appointment.userId) {
         throw new Error('Falta userID');
     }
 
-    const user = await UserModel.findOne({ where: { id: userId } });
+    const user = await UserModel.findOne({ where: userId });
     if (!user) {
         throw new Error('El usuario no existe en la base de datos');
     }

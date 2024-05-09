@@ -42,8 +42,8 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
         const {name, email, birthdate, nDni, username, password} = req.body
         const user = {name, email, birthdate, nDni};
         const credentials = {username, password};
-        const newUser :User = await createUserService(credentials, user)
-        res.status(201).json(newUser)
+        const newUser = await createUserService(credentials, user)
+        res.status(201).json({"message": "Usuario registrado exitosamente"})
     } catch (error) {
         res.status(400).send("Error al registrar el usuario")
     }

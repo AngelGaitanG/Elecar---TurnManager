@@ -18,7 +18,7 @@ export class Appointment {
     time: string
 
     @ManyToOne(() => User, (user) => user.appointments)
-    userId: number;
+    userId: User;
 
     @Column({default: "active"})
     status: string

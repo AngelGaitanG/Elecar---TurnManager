@@ -29,7 +29,7 @@ export const getUserByIdService = async (id: number): Promise<User> => {
     return userById;
 }
 
-export const createUserService = async (credentials: ICredentialDto, userData: IUserDto):Promise<User> => {
+export const createUserService = async (credentials: ICredentialDto, userData: IUserDto):Promise<void> => {
     
     if(!credentials){
         throw new Error('Faltan credenciales');
@@ -40,9 +40,13 @@ export const createUserService = async (credentials: ICredentialDto, userData: I
     const {name, email, birthdate, nDni} = userData;
 
     const existingUser = await UserModel.findOne({ where: { email } });
-  if (existingUser) {
-    throw new Error('El email ya está registrado');
-  }
+    if (existingUser) {
+        throw new Error('El email ya está registrado');
+    }
+    const existingDni = await UserModel.findOne({ where: { nDni } });
+    if(existingDni) {
+        throw new Error('El dni ya existe');
+    }
 
     const newUser = {
         name,
@@ -52,7 +56,7 @@ export const createUserService = async (credentials: ICredentialDto, userData: I
         credentialsId: credential
     }
     const user: User =  await UserModel.create(newUser);
-    const results = await UserModel.save(user);
+     await UserModel.save(user);
 
-    return results;
+;
 }
