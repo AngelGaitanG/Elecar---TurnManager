@@ -18,12 +18,14 @@
     position: fixed;
     top: 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     height: 60px;
     width: 70%;
-    background-color: #1e2026;
+    background-color: rgba(0, 0, 0, 0.707);
     align-items: center;
-    box-shadow: 0 0 3px black;
+    box-shadow: 0 0 10px black;
+    z-index: 99;
+    padding-right: 10px;
 }
 
 .logoImg {
@@ -41,9 +43,6 @@
 .menuItem {
     margin: 20px;
     list-style: none;
-}
-
-a {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     color: white;
@@ -52,7 +51,9 @@ a {
     transition: .7s ease;
     text-shadow: 0 0 10px black;
 }
-a:hover {
+
+
+.menuItem:hover {
     color: white;
     background-color: gray;
     box-shadow: 0 0 10px black;
@@ -68,7 +69,7 @@ a:hover {
     padding: 10px 20px;
     cursor: pointer;    
     border: none;
-    background-color: #4e8ab5;
+    background-color: #4e8ab549;
     transition: .5s ease;
 }
 
@@ -80,3 +81,22 @@ a:hover {
 }
 
 
+.loginButton{
+    color: white;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    text-shadow: 0 0 10px black;
+    padding: 10px 20px;
+    cursor: pointer;    
+    border: none;
+    background-color: rgba(0, 139, 139, 0.24);
+    transition: .5s ease;
+}
+
+.loginButton:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.204);
+    
+    box-shadow: 0 0 10px black;
+}

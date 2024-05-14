@@ -1,21 +1,30 @@
 
 /* eslint-disable */
 
-import { useState } from "react"
-import myTurns from "../../helpers/myTurns"
-import Turno from "../../components/Turno/Turno";
+import { useEffect, useState } from "react"
+import Turno from "../../components/Appointment/Turno";
+import styles from "../Mis Turnos/MisTurnos.module.css"
+import axios from "axios"
 
 
 const MisTurnos = () => {
-    const [turns, setTurns] = useState(myTurns);
+    const [turns, setTurns] = useState([]);
 
-    return <div>
+    useEffect(() => {
+        axios.get('http://localhost:3000/appointments').then((res) => setTurns(res.data)).catch((err) => alert(err))
+    }, [])
+
+    return (<div className={styles.misTurnos}>
+        <div className={styles.turnosContainer}>
         <h1>Mis Turnos</h1>
+        <div className={styles.turnos}>
         {turns.map((turn) => {
             return <Turno key={turn.id} {...turn}/> 
             })
             }
-    </div>
+        </div>
+        </div>
+    </div>)
 }
 
 export default MisTurnos

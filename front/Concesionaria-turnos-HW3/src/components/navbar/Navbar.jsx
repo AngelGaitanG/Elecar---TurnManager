@@ -2,7 +2,7 @@ import styles from "./Navbar.module.css"
 import Logo from "./navBarComponents/Logo"
 import Menu from "./navBarComponents/Menu"
 import RegisterButton from "./navBarComponents/RegisterButton"
-
+import LoginButton from "./navBarComponents/LoginButton"
 
 const Navbar = () => {
     return (
@@ -10,6 +10,7 @@ const Navbar = () => {
             <div className={styles.navbar}>
                 <Logo />
                 <Menu />
+                <LoginButton/>
                 <RegisterButton />
             </div>
         </div>

@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+    --primary-color: #2C3E50; 
+    --secondary-color: #E74C3C; 
+    --background-color: #ECF0F1; 
+}
+
+.principalSection {
+    display: flex;
+    padding: 0 30px;
+    height: 475px;
+}
+
+.desSection {
+    color: var(--background-color);
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    width: 30vw;
+    padding: 60px 20px;
+    background-color: rgba(0, 0, 0, 0.411); 
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 0 20px black;
+}
+
+.desSection h2 {
+    margin: 10px 0 20px;
+    font-size: 30px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.233);
+}
+
+.desSection p {
+    margin: 20px 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.imageSection {
+    width: 63.5vw;
+}
+
+.imageSection img {
+    width: 100%;
+    box-shadow: 0 0 10px black; 
+    object-fit: contain;
+}
