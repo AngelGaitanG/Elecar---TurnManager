@@ -39,7 +39,7 @@ export const loginCredential = async (username: string, password: string) => {
            const user = await getUserByIdService(credential.id)
            if (user) {
             const userLogged = {
-                login: true,
+                
                 user: {
                     id: user.id,
                     name: user.name,
@@ -48,7 +48,7 @@ export const loginCredential = async (username: string, password: string) => {
                     nDni: user.nDni
                 }
             }
-            return userLogged 
+            return {login: true, user: user}	
         }
     }
 }

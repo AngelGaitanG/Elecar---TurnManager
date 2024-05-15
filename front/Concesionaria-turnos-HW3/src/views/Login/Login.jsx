@@ -2,10 +2,12 @@ import { useState } from "react";
 import style from "./Login.module.css"
 import validateLogin from "../../helpers/validateLogin";
 import axios from "axios";
+import { useDispatch } from "react-redux"
+import { setUserData } from "../../redux/reducer";
 
 const Login = () => {
-
-    const [userData, setUserData] = useState({
+    const dispatch = useDispatch()
+    const [userData, setUserDaton] = useState({
         username: "",
         password: ""
     });
@@ -17,7 +19,7 @@ const Login = () => {
 
 const handleChange = (event) => {
  const { name, value } = event.target;
- setUserData({ ...userData, [name]: value });
+ setUserDaton({ ...userData, [name]: value });
  const errors = validateLogin(userData);
  setErrors(errors);
 }
@@ -25,12 +27,16 @@ const handleChange = (event) => {
 const handleSubmit = (event) => {
     event.preventDefault();
     const formErrors = validateLogin(userData);
+    const {username, password} = userData
     if (Object.keys(errors).length === 0) {
-        axios.post('http://localhost:3000/users/login', userData).then(() => {
-            alert("Usuario logueado exitosamente");
-        }).catch(() => {
+        try{
+         axios.post('http://localhost:3000/users/login', {username, password: password}).then((response) => {
+             alert("Usuario logueado exitosamente");
+             dispatch(setUserData(response.data));
+         })
+        } catch(error) {
             alert("Error al iniciar sesion");
-        })
+        }
     } else {
         setErrors(formErrors);
     }

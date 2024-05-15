@@ -6,6 +6,7 @@ import Home from './views/Home/Home'
 import MisTurnos from './views/Mis Turnos/MisTurnos'
 import Login from './views/Login/Login'
 import { Routes, Route } from 'react-router-dom'
+import CreateAppointment from './views/CreateAppointment/CreateAppointment'
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register" element={<Register />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/mis-turnos" element={<MisTurnos/>}/>
+        <Route path="/make-appointment" element={<CreateAppointment />}/>
     </Routes>
     </div>
 

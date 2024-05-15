@@ -85,7 +85,7 @@ import style from "./Register.module.css"
                     <input type="password" name="confirmPassword" id="confirmPassword" value={userData.confirmPassword} onChange={handleChange}/>
                     {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
                 </div>
-                <button type="submit">Register</button>
+                <button type="submit" disabled={Object.keys(errors).length !== 0}>Register</button>
             </form>
         </div>
         

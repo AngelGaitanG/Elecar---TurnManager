@@ -90,6 +90,12 @@ input:focus {
 .form button:hover {
   background-color: var(--primary-color);
 }
+.form button[disabled] {
+  background-color: gray;
+  cursor: not-allowed;
+  box-shadow: none;
+  transition: .5s ease;
+}
 .form p{
     position: absolute;
     bottom: -35px;
