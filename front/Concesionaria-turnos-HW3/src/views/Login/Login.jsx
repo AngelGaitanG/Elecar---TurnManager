@@ -4,6 +4,7 @@ import validateLogin from "../../helpers/validateLogin";
 import axios from "axios";
 import { useDispatch } from "react-redux"
 import { setUserData } from "../../redux/reducer";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -16,6 +17,7 @@ const Login = () => {
         password: ""
     });
 
+    const navigate = useNavigate();
 
 const handleChange = (event) => {
  const { name, value } = event.target;
@@ -33,6 +35,7 @@ const handleSubmit = (event) => {
          axios.post('http://localhost:3000/users/login', {username, password: password}).then((response) => {
              alert("Usuario logueado exitosamente");
              dispatch(setUserData(response.data));
+             navigate("/");
          })
         } catch(error) {
             alert("Error al iniciar sesion");

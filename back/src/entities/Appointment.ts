@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User";
+import Service from "../interfaces/IService";
 
 
 @Entity({
@@ -10,6 +11,9 @@ export class Appointment {
 
     @PrimaryGeneratedColumn()
     id: number
+
+    @Column()
+    service: Service
 
     @Column()
     date: Date

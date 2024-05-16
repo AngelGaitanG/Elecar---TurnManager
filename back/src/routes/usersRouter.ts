@@ -4,6 +4,7 @@
 
 import { Router } from "express";
 import { getUserbyId, getUsers,  loginUser,  registerUser } from "../controllers/usersController";
+import registerDataCheck from "../middlewares/registerMiddleware";
 
 const userRouter: Router = Router();
 
@@ -11,7 +12,7 @@ userRouter.get("/", getUsers);
 
 userRouter.get("/:id", getUserbyId);
 
-userRouter.post("/register", registerUser);
+userRouter.post("/register", registerDataCheck, registerUser);
 
 userRouter.post("/login", loginUser);
 

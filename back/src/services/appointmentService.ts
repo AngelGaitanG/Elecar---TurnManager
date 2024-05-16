@@ -21,7 +21,7 @@ export const getAppointmentByIdService = async (id: number): Promise<Appointment
 }
 
 export const createAppointmentService = async (appointment: Appointment): Promise<Appointment> => {
-    const { date, time, userId, status } = appointment;
+    const {service, date, time, userId, status } = appointment;
     
     if (!appointment.userId) {
         throw new Error('Falta userID');
@@ -33,6 +33,7 @@ export const createAppointmentService = async (appointment: Appointment): Promis
     }
 
     const objectAppointment = {
+        service,
         date,
         time,
         userId,

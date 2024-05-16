@@ -27,7 +27,8 @@ const MisTurnos = () => {
         <h1>Mis Turnos</h1>
         <div className={styles.turnos}>
         {appointments.map((turn) => {
-            return <Turno key={turn.id} {...turn} onRefresh={handleRefresh}/> 
+            const fecha = turn.date.split('T')[0];
+            return <Turno key={turn.id} id={turn.id} date={fecha} time={turn.time} status={turn.status} service={turn.service} onRefresh={handleRefresh}/> 
             })
             }
         </div>

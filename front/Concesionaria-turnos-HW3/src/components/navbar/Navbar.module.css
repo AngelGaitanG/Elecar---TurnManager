@@ -47,7 +47,7 @@
     font-weight: 600;
     color: white;
     text-decoration: none;
-    padding: 15px 20px;
+    padding: 15px 10px;
     transition: .7s ease;
     text-shadow: 0 0 10px black;
 }
@@ -95,6 +95,27 @@
 }
 
 .loginButton:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.204);
+    
+    box-shadow: 0 0 10px black;
+}
+
+
+.logout{
+    color: white;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    text-shadow: 0 0 10px black;
+    padding: 10px 20px;
+    cursor: pointer;    
+    border: none;
+    background-color: #dc280049;
+    transition: .5s ease;
+}
+
+.logout:hover {
     color: white;
     background-color: rgba(0, 0, 0, 0.204);
     

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { validate } from "../../helpers/validate";
+import { validate } from "../../helpers/validateRegister";
 import axios from "axios"
 import style from "./Register.module.css"
+import { useNavigate } from "react-router-dom";
  const Register = () => {
     const [userData, setUserData] = useState({
         name: "",
@@ -23,21 +24,32 @@ import style from "./Register.module.css"
         confirmPassword: ""
     });
 
+    const navigate = useNavigate();
+
     const handleChange = (event) => {
         const { name, value } = event.target;
 
-        setUserData({ ...userData, [name]: value });
-       
-        const errors = validate(userData);
-        setErrors(errors);
-    }
+        setUserData((prevUserData) => {
+            const updatedUserData = { ...prevUserData, [name]: value };
+            const validationErrors = validate(updatedUserData);
+            setErrors(validationErrors);
+            return updatedUserData;
+        });
+    };
+    // eslint-disable-next-line no-unused-vars
+    
+
 
     const handleSubmit = (event) => {
+        // eslint-disable-next-line no-unused-vars
+        const { confirmPassword, nDni, ...dataToSubmit } = userData;
+        dataToSubmit.nDni = Number(nDni);
         event.preventDefault();
         const formErrors = validate(userData);
         if (Object.keys(errors).length === 0) {
-            axios.post('http://localhost:3000/users/register', userData).then(() => {
+            axios.post('http://localhost:3000/users/register', dataToSubmit).then(() => {
                 alert("Usuario registrado exitosamente");
+                navigate("/login");
             }).catch(() => {
                 alert("Error al registrar el usuario");
             })

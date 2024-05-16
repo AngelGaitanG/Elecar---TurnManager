@@ -1,10 +1,9 @@
 import axios from "axios";
-import serviceImages from "../../helpers/serviceImages";
-
+import { getImg } from "../../helpers/serviceImages";
 /* eslint-disable */
-const { ventasVehiculosImg, asesoriaPersonalizadaImg, mantenimientoImg, reparacionesImg, testdriveImg } = serviceImages
 
-const Turno = ({id, date, time, status, onRefresh}) => {
+
+const Turno = ({id, date, time, status, service, onRefresh}) => {
     const handleCancel = (event) => {
         event.preventDefault();
         try {
@@ -16,29 +15,11 @@ const Turno = ({id, date, time, status, onRefresh}) => {
             console.log(error)
         }
     }
-    // switch(service) {
-    //     case 'ventas de vehiculos':
-    //         serviceImage = ventasVehiculosImg;
-    //         break;
-    //     case 'asesoramiento personalizado':
-    //         serviceImage = asesoriaPersonalizadaImg;
-    //         break;
-    //     case 'mantenimiento':
-    //         serviceImage = mantenimientoImg;
-    //         break;
-    //     case 'reparaciones':
-    //         serviceImage = reparacionesImg;
-    //         break;
-    //     case 'pruebas de manejo':
-    //         serviceImage = testdriveImg;
-    //         break;
-    //     default:
-    //         serviceImage = 'ruta/a/imagen/por_defecto.jpg';
-    // }
+    const imagen = getImg(service)
 
     return <div>
-        <img src={testdriveImg}/>
-        <h2>TestDrive</h2>
+        <img src={imagen}/>
+        <h2>{service}</h2>
         <p>Nro. Turno: {id}</p>
         <p>Fecha: {date}</p>
         <p>Hora: {time}</p>

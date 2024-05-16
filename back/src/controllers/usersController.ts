@@ -7,15 +7,8 @@ import { User } from "../entities/User"
 
 export const getUsers = async (req: Request, res: Response) => {
     const users = await getUsersService()
-    const formattedUsers = users.map(user => ({
-        ...user,
-        birthdate: new Date(user.birthdate).toISOString().split('T')[0],
-        appointments: user.appointments.map(appointment => ({
-            ...appointment,
-            date: new Date(appointment.date).toISOString().split('T')[0]
-        }))
-    }));
-    res.status(200).json(formattedUsers)
+    
+    res.status(200).json(users)
 }
 
 export const getUserbyId = async (req: Request, res: Response) => {
@@ -23,15 +16,8 @@ export const getUserbyId = async (req: Request, res: Response) => {
         const { id } = req.params
         const userId = parseInt(id)
         const user = await getUserByIdService(userId)
-        const formattedUser = {
-            ...user,
-            birthdate: new Date(user.birthdate).toISOString().split('T')[0],
-            appointments: user.appointments.map(appointment => ({
-                ...appointment,
-                date: new Date(appointment.date).toISOString().split('T')[0]
-            }))
-        };
-        res.status(200).json(formattedUser)
+        
+        res.status(200).json(user)
     } catch (error) {
         res.status(404).send("No se encontro el usuario")
     }
@@ -42,7 +28,7 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
         const {name, email, birthdate, nDni, username, password} = req.body
         const user = {name, email, birthdate, nDni};
         const credentials = {username, password};
-        const newUser = await createUserService(credentials, user)
+         await createUserService(credentials, user)
         res.status(201).json({"message": "Usuario registrado exitosamente"})
     } catch (error) {
         res.status(400).send("Error al registrar el usuario")
