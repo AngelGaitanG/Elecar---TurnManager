@@ -5,7 +5,9 @@ import RegisterButton from "./navBarComponents/RegisterButton"
 import LoginButton from "./navBarComponents/LoginButton"
 import { useSelector, useDispatch } from "react-redux"
 import { setUserAppointments, setUserData } from "../../redux/reducer"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+
+import ProfileIcon from "../ProfileIcon/ProfileIcon"
 
 const Navbar = () => {
 
@@ -27,6 +29,7 @@ const Navbar = () => {
                 <Menu />
                 {!logged && <LoginButton />}
                 {!logged && <RegisterButton />}
+                {logged && <Link to={"/profile"}><ProfileIcon  /></Link>}
                 {logged && <button className={styles.logout} onClick={logout}>Logout</button>}
             </div>
         </div>

@@ -14,10 +14,13 @@ export const userSlice = createSlice({
         },
         setUserAppointments: (state, action) => {
             state.userAppointments = action.payload
+        },
+        setImageProfile: (state, action) => {
+            state.userData.user.imageUrl = action.payload
         }
     }
 })
 
-export const { setUserData, setUserAppointments } = userSlice.actions;
+export const { setUserData, setUserAppointments, setImageProfile } = userSlice.actions;
 
 

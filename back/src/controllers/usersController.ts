@@ -1,9 +1,9 @@
 import { Request, Response } from "express"
-import { createUserService, getUserByIdService, getUsersService } from "../services/usersService"
-import IUser from "../interfaces/IUser"
+import { createUserService, getUserByIdService, getUsersService, updateProfilePhoto } from "../services/usersService"
 import { loginCredential } from "../services/credentialsService"
-import { User } from "../entities/User"
-
+import fs from "node:fs"
+import multer from "multer"
+import path from "node:path"
 
 export const getUsers = async (req: Request, res: Response) => {
     const users = await getUsersService()
@@ -44,4 +44,20 @@ export const loginUser = async (req: Request, res: Response) => {
     catch(error){
         res.status(400).send("Credenciales invalidas");
     }
+}
+
+export const changePhoto = async (req: Request, res: Response) => {
+    const imageUrl = req.file?.filename;
+    const id = parseInt(req.params.id)
+    console.log(imageUrl)
+    console.log(id)
+
+    if(imageUrl){
+        try{
+       const imagencita = await updateProfilePhoto(id, imageUrl);
+        res.status(200).json(imagencita);
+    } catch(error){
+        res.status(400).send("Error al cambiar la imagen")}
+    }
+    
 }

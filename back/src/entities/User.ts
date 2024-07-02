@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Credential } from "./Crendential";
 import { Appointment } from "./Appointment";
+import path from "path";
 
 
 @Entity({
@@ -30,4 +31,7 @@ export class User {
 
     @OneToMany(() => Appointment, (appointment) => appointment.userId)
     appointments: Appointment[];
+
+    @Column({default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"})
+    imageUrl: string
 }

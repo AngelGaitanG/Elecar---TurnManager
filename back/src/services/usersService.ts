@@ -60,3 +60,17 @@ export const createUserService = async (credentials: ICredentialDto, userData: I
 
 ;
 }
+
+export const updateProfilePhoto = async (id: number, imageUrl: string): Promise<User | undefined> => {
+    try {
+        const user = await UserModel.findOne({ where: { id } });
+        if (user) {
+            user.imageUrl = `http://localhost:3000/images/${imageUrl}`; 
+            await UserModel.save(user);
+            return user;
+        }
+        return undefined; 
+    } catch (error) {
+        console.error("Error al actualizar la foto de perfil:", error);
+        return undefined;
+    }}

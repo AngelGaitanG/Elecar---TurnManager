@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom'
 import CreateAppointment from './views/CreateAppointment/CreateAppointment'
 import About from './views/About/About'
 import Contact from './views/Contact/Contact'
+import Profile from './views/Profile/Profile'
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/contact" element={<Contact />}/>
         <Route path="/mis-turnos" element={<MisTurnos/>}/>
         <Route path="/make-appointment" element={<CreateAppointment />}/>
+        <Route path="/profile" element={<Profile />}/>
     </Routes>
     </div>
 
