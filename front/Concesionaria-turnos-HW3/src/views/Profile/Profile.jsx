@@ -7,7 +7,8 @@ import { setImageProfile } from "../../redux/reducer";
 
 const Profile = () => {
     const dispatch = useDispatch();
-    const id = useSelector(state => state.user.userData.user.id)
+    const user = useSelector(state => state.user.userData.user)
+    const userId = user.id
     const [file, setFile] = useState(null);
     const handleUpload = (e) => {
         console.log("click")
@@ -19,7 +20,7 @@ const Profile = () => {
             console.log("entraste al archivo")
             const formData = new FormData();
             formData.append('file', file);
-            axios.post(`http://localhost:3000/users/${id}/configuration`, formData)
+            axios.post(`http://localhost:3000/users/${userId}/configuration`, formData)
             .then((response) => {
                 console.log(response.data.imageUrl);
                 dispatch(setImageProfile(response.data.imageUrl));})
@@ -32,9 +33,7 @@ const Profile = () => {
             <div className={styles.containerProfile}>
                 <div className={styles.containerLeft}>
                     <h2>Profile</h2>
-                    <button>Aca ira algo</button>
-                    <button>Aca ira algo</button>
-                    <button>Aca ira algo</button>
+                    <img src={user.imageUrl}/>
                 </div>
                 <div className={styles.containerRight}>
                     <h2>Configuracion</h2>
