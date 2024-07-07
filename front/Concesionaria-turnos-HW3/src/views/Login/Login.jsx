@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState } from "react";
 import style from "./Login.module.css"
 import validateLogin from "../../helpers/validateLogin";
@@ -5,6 +6,9 @@ import axios from "axios";
 import { useDispatch } from "react-redux"
 import { setUserData } from "../../redux/reducer";
 import { useNavigate } from "react-router-dom";
+import { configDotenv as dotenv } from "dotenv";
+
+dotenv('./.env');
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -32,7 +36,7 @@ const handleSubmit = (event) => {
     const {username, password} = userData
     if (Object.keys(errors).length === 0) {
         try{
-         axios.post('http://localhost:3000/users/login', {username, password: password}).then((response) => {
+         axios.post(`${process.env.URL_BACKEND}/users/login`, {username, password: password}).then((response) => {
              alert("Usuario logueado exitosamente");
              dispatch(setUserData(response.data));
              navigate("/");

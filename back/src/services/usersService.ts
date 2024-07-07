@@ -65,7 +65,7 @@ export const updateProfilePhoto = async (id: number, imageUrl: string): Promise<
     try {
         const user = await UserModel.findOne({ where: { id } });
         if (user) {
-            user.imageUrl = `http://localhost:3000/images/${imageUrl}`; 
+            user.imageUrl = `https://elecar-turnmanager.onrender.com/images/${imageUrl}`; 
             await UserModel.save(user);
             return user;
         }
