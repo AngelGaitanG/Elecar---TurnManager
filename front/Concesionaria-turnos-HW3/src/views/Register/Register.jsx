@@ -5,8 +5,7 @@ import { validate } from "../../helpers/validateRegister";
 import axios from "axios"
 import style from "./Register.module.css"
 import { useNavigate } from "react-router-dom";
-import config from "../../../configENV";
-config
+
 
  const Register = () => {
     const [userData, setUserData] = useState({
@@ -52,7 +51,7 @@ config
         event.preventDefault();
         const formErrors = validate(userData);
         if (Object.keys(errors).length === 0) {
-            axios.post(`${config.URL_BACKEND}/users/register`, dataToSubmit).then(() => {
+            axios.post(`https://elecar-turnmanager.onrender.com/users/register`, dataToSubmit).then(() => {
                 alert("Usuario registrado exitosamente");
                 navigate("/login");
             }).catch(() => {

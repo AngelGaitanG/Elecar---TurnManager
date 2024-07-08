@@ -6,7 +6,7 @@ import { validate } from '../../helpers/validateAppointmentCreate';
 import styles from './createAppointment.module.css';
 import { useNavigate } from "react-router-dom";
 import { setUserAppointments } from "../../redux/reducer";
-import config from "../../../configENV";
+
 
 const CreateAppointment = () => {
     const dispatch = useDispatch();
@@ -51,7 +51,7 @@ const CreateAppointment = () => {
         if (Object.keys(errors).length === 0) {
             setErrors(errors);
             try {
-                const response = await axios.post(`${config.URL_BACKEND}/appointments/schedule`, appointmentData);
+                const response = await axios.post(`https://elecar-turnmanager.onrender.com/appointments/schedule`, appointmentData);
                 alert("Turno creado exitosamente");
 
                 // Dispatch the action to update userAppointments

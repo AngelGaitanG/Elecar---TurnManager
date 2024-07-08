@@ -1,13 +1,12 @@
 /* eslint-disable */
 import axios from "axios";
 import { getImg } from "../../helpers/serviceImages";
-import config from "../../../configENV";
 
 const Turno = ({id, date, time, status, service, onRefresh}) => {
     const handleCancel = (event) => {
         event.preventDefault();
         try {
-            axios.put(`${config.URL_BACKEND}/appointments/cancel/${id}`).then((res) =>{
+            axios.put(`https://elecar-turnmanager.onrender.com/appointments/cancel/${id}`).then((res) =>{
                 alert("Turno cancelado exitosamente");
                 onRefresh()})
         } catch (error) {

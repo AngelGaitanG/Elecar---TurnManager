@@ -6,7 +6,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux"
 import { setUserData } from "../../redux/reducer";
 import { useNavigate } from "react-router-dom";
-import config from "../../../configENV";
 
 
 const Login = () => {
@@ -35,7 +34,7 @@ const handleSubmit = (event) => {
     const {username, password} = userData
     if (Object.keys(errors).length === 0) {
         try{
-         axios.post(`${config.URL_BACKEND}/users/login`, {username, password: password}).then((response) => {
+         axios.post(`https://elecar-turnmanager.onrender.com/users/login`, {username, password: password}).then((response) => {
              alert("Usuario logueado exitosamente");
              dispatch(setUserData(response.data));
              navigate("/");

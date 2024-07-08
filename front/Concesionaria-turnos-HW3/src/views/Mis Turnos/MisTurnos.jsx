@@ -6,7 +6,7 @@ import styles from "../Mis Turnos/MisTurnos.module.css"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux";
 import { setUserAppointments } from "../../redux/reducer";
-import config from "../../../configENV";
+
 
 
 
@@ -17,11 +17,11 @@ const MisTurnos = () => {
 
 
     useEffect(() => {
-        axios.get(`${config.URL_BACKEND}/users/${userId}`).then((res) => dispatch(setUserAppointments(res.data.appointments)))
+        axios.get(`https://elecar-turnmanager.onrender.com/users/${userId}`).then((res) => dispatch(setUserAppointments(res.data.appointments)))
     }, [userId, dispatch])
 
     const handleRefresh = () => {
-        axios.get(`${config.URL_BACKEND}/users/${userId}`).then((res) => dispatch(setUserAppointments(res.data.appointments)))
+        axios.get(`https://elecar-turnmanager.onrender.com/users/${userId}`).then((res) => dispatch(setUserAppointments(res.data.appointments)))
     }
 
     return (<div className={styles.misTurnos}>
