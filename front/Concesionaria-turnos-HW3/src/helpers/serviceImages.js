@@ -1,10 +1,10 @@
 const serviceImages = {
-    ventasVehiculosImg: 'src/assets2/ventas2.jpg',
-    asesoriaPersonalizadaImg: 'src/assets2/asesoria.jpg',
-    mantenimientoImg: 'src/assets2/mantenimiento.jpg',
-    reparacionesImg: 'src/assets2/reparaciones.jpg',
-    testdriveImg: 'src/assets2/testdrive2.jpg',
-    default: 'src/assets2/testdrive.jpg'
+    ventasVehiculosImg: '../assets2/ventas2.jpg',
+    asesoriaPersonalizadaImg: '../assets2/asesoria.jpg',
+    mantenimientoImg: '../assets2/mantenimiento.jpg',
+    reparacionesImg: '../assets2/reparaciones.jpg',
+    testdriveImg: '../assets2/testdrive2.jpg',
+    default: '../assets2/testdrive.jpg'
 }
 
 export const getImg = (service) => {
