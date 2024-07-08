@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { setUserAppointments } from "../../redux/reducer";
 import { configDotenv as dotenv } from "dotenv";
 
-dotenv('./.env');
+dotenv();
 
 const CreateAppointment = () => {
     const dispatch = useDispatch();

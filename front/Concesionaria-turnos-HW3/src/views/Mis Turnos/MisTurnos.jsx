@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserAppointments } from "../../redux/reducer";
 import { configDotenv as dotenv } from "dotenv";
 
-dotenv('./.env');
+dotenv();
 
 
 const MisTurnos = () => {

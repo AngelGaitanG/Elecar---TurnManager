@@ -2,7 +2,7 @@ import axios from "axios";
 import { getImg } from "../../helpers/serviceImages";
 import { configDotenv as dotenv } from "dotenv";
 /* eslint-disable */
-dotenv('./.env')
+dotenv()
 
 const Turno = ({id, date, time, status, service, onRefresh}) => {
     const handleCancel = (event) => {

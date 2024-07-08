@@ -6,7 +6,7 @@ import style from "./Register.module.css"
 import { useNavigate } from "react-router-dom";
 import { configDotenv as dotenv } from "dotenv";
 
-dotenv('./.env');
+dotenv();
 
  const Register = () => {
     const [userData, setUserData] = useState({

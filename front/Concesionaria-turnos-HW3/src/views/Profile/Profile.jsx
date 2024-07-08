@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setImageProfile } from "../../redux/reducer";
 import { configDotenv as dotenv } from "dotenv";
 
-dotenv('./.env');
+dotenv();
 
 
 const Profile = () => {

@@ -8,7 +8,7 @@ import { setUserData } from "../../redux/reducer";
 import { useNavigate } from "react-router-dom";
 import { configDotenv as dotenv } from "dotenv";
 
-dotenv('./.env');
+dotenv();
 
 const Login = () => {
     const dispatch = useDispatch()
