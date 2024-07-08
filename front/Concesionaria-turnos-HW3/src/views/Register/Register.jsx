@@ -1,12 +1,12 @@
 /* eslint-disable no-undef */
+
 import { useState } from "react";
 import { validate } from "../../helpers/validateRegister";
 import axios from "axios"
 import style from "./Register.module.css"
 import { useNavigate } from "react-router-dom";
-import { configDotenv as dotenv } from "dotenv";
-
-dotenv();
+import config from "../../../configENV";
+config
 
  const Register = () => {
     const [userData, setUserData] = useState({
@@ -52,7 +52,7 @@ dotenv();
         event.preventDefault();
         const formErrors = validate(userData);
         if (Object.keys(errors).length === 0) {
-            axios.post(`${process.env.URL_BACKEND}/users/register`, dataToSubmit).then(() => {
+            axios.post(`${config.URL_BACKEND}/users/register`, dataToSubmit).then(() => {
                 alert("Usuario registrado exitosamente");
                 navigate("/login");
             }).catch(() => {

@@ -4,9 +4,8 @@ import styles from "./Profile.module.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setImageProfile } from "../../redux/reducer";
-import { configDotenv as dotenv } from "dotenv";
+import config from "../../../configENV";
 
-dotenv();
 
 
 const Profile = () => {
@@ -24,7 +23,7 @@ const Profile = () => {
             console.log("entraste al archivo")
             const formData = new FormData();
             formData.append('file', file);
-            axios.post(`${process.env.URL_BACKEND}/users/${userId}/configuration`, formData)
+            axios.post(`${config.URL_BACKEND}/users/${userId}/configuration`, formData)
             .then((response) => {
                 console.log(response.data.imageUrl);
                 dispatch(setImageProfile(response.data.imageUrl));})

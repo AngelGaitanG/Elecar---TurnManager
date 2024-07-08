@@ -6,9 +6,8 @@ import styles from "../Mis Turnos/MisTurnos.module.css"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux";
 import { setUserAppointments } from "../../redux/reducer";
-import { configDotenv as dotenv } from "dotenv";
+import config from "../../../configENV";
 
-dotenv();
 
 
 const MisTurnos = () => {
@@ -18,11 +17,11 @@ const MisTurnos = () => {
 
 
     useEffect(() => {
-        axios.get(`${process.env.URL_BACKEND}/users/${userId}`).then((res) => dispatch(setUserAppointments(res.data.appointments)))
+        axios.get(`${config.URL_BACKEND}/users/${userId}`).then((res) => dispatch(setUserAppointments(res.data.appointments)))
     }, [userId, dispatch])
 
     const handleRefresh = () => {
-        axios.get(`${process.env.URL_BACKEND}/users/${userId}`).then((res) => dispatch(setUserAppointments(res.data.appointments)))
+        axios.get(`${config.URL_BACKEND}/users/${userId}`).then((res) => dispatch(setUserAppointments(res.data.appointments)))
     }
 
     return (<div className={styles.misTurnos}>
