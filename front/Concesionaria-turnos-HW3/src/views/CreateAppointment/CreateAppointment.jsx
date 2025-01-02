@@ -10,7 +10,7 @@ import { setUserAppointments } from "../../redux/reducer";
 
 const CreateAppointment = () => {
     const dispatch = useDispatch();
-    const userId = useSelector(state => state.user.userData.user.id);
+    const userId = useSelector(state => state.user.userData.user.userId);
     const userAppointments = useSelector(state => state.user.userAppointments);
     const [appointmentData, setAppointmentData] = useState({
         service: "",
@@ -51,11 +51,14 @@ const CreateAppointment = () => {
         if (Object.keys(errors).length === 0) {
             setErrors(errors);
             try {
-                const response = await axios.post(`https://elecar-turnmanager.onrender.com/appointments/schedule`, appointmentData);
-                alert("Turno creado exitosamente");
+                // Simular la creación de una cita y agregarla a las citas existentes
+                const newAppointment = { ...appointmentData, id: Date.now(), status: "pending" };
+                const updatedAppointments = [...userAppointments, newAppointment];
 
-                // Dispatch the action to update userAppointments
-                dispatch(setUserAppointments([...userAppointments, response.data]));
+                // Despachar la acción para actualizar las citas del usuario
+                dispatch(setUserAppointments(updatedAppointments));
+
+                alert("Turno creado exitosamente");
 
                 navigate("/mis-turnos");
             } catch (error) {

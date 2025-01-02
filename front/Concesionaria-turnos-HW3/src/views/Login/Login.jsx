@@ -33,15 +33,21 @@ const handleSubmit = (event) => {
     const formErrors = validateLogin(userData);
     const {username, password} = userData
     if (Object.keys(errors).length === 0) {
-        try{
-         axios.post(`https://elecar-turnmanager.onrender.com/users/login`, {username, password: password}).then((response) => {
-             alert("Usuario logueado exitosamente");
-             dispatch(setUserData(response.data));
-             navigate("/");
-         })
-        } catch(error) {
-            alert("Error al iniciar sesion");
-        }
+        // Simulación de una respuesta exitosa del backend
+        const fakeResponse = {
+            data: {
+                token: "fakeToken123",
+                user: {
+                    userId: 1,
+                    username: userData.username,
+                    password: userData.password,
+                    imageUrl: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+                }
+            }
+        };
+        alert("Usuario logueado exitosamente");
+        dispatch(setUserData(fakeResponse.data));
+        navigate("/");
     } else {
         setErrors(formErrors);
     }

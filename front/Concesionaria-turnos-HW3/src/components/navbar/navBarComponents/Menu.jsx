@@ -3,7 +3,7 @@ import styles from "../Navbar.module.css"
 import { useSelector } from "react-redux"
 
 const Menu = () => {
-    const logged = useSelector(state => state.user.userData.login)
+    const logged = useSelector(state => state.user.userData.token)
 
     return (
         <div className={styles.menu}>

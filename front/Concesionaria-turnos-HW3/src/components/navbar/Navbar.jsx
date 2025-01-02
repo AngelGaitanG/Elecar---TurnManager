@@ -21,7 +21,7 @@ const Navbar = () => {
             navigate("/login");
         }
     }
-    const logged = useSelector(state => state.user.userData.login)
+    const logged = useSelector(state => state.user.userData.token)
     return (
         <div className={styles.navbarContainer}>
             <div className={styles.navbar}>
